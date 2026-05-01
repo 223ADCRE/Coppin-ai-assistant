@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { DataAPIClient } from "@datastax/astra-db-ts";
@@ -36,7 +37,7 @@ export async function POST(req: Request) {
     try {
       const collection = await db.collection(ASTRA_DB_COLLECTION!);
 
-      const cursor = collection.find(null, {
+      const cursor = collection.find({}, {
         sort: {
           $vector: embedding.data[0].embedding,
         },
@@ -84,7 +85,7 @@ END CONTEXT
       ],
     });
 
-    const stream = OpenAIStream(response);
+    const stream = OpenAIStream(response as any);
     return new StreamingTextResponse(stream);
 
   } catch (error) {

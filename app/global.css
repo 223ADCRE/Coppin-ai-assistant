@@ -106,10 +106,11 @@ body {
 }
 
 /* BOT BUBBLE */
-.message-row.bot .bubble {
-  background: #f1f1f1;
-  color: #111;
+.message-row.assistant .bubble {
+  background: #ffcc00 !important;
+  color: #ffffff !important;
   border-bottom-left-radius: 4px;
+  font-weight: 500;
 }
 
 /* TIME */
