@@ -1,18 +1,20 @@
 import "./global.css";
-import type { Metadata } from 'next';
+import { Inter } from "next/font/google";
+import type { Metadata } from "next";
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-    title: "RAG Chatbot",
-    description: "A chatbot that uses Retrieval-Augmented Generation (RAG) to provide accurate and relevant responses based on a knowledge base.",
+  title: "EDUCHAT AI — Your School Assistant",
+  description: "AI-powered assistant for Coppin State University students and applicants.",
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <html lang="en">
-            <body>{children}</body>
-        </html>
-    );
+  return (
+    <html lang="en" className={inter.variable}>
+      <body>{children}</body>
+    </html>
+  );
 };
 
 export default RootLayout;

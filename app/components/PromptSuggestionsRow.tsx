@@ -1,39 +1,50 @@
-import PromptSuggestionButton from "./PromptSuggestionButton";
-
-/**
- * Props for the suggestion row
- * onPromptClick → function passed from parent (page.tsx)
- */
 interface PromptSuggestionsRowProps {
   onPromptClick: (prompt: string) => void;
 }
 
-/**
- * List of starter prompts shown when chat is empty
- * Designed to guide users into meaningful queries (important for RAG quality)
- */
-const PROMPTS: string[] = [
-  "What are the admission requirements?",
-  "Tell me about Coppin State programs",
-  "How do I apply for financial aid?",
-  "What is student life like at Coppin?",
-  "Are there online courses available?",
-  "How can I reset my student portal password?",
+const CATEGORIES = [
+  {
+    label: "Admissions",
+    prompts: [
+      { icon: "📋", text: "What are the admission requirements?" },
+      { icon: "📝", text: "How do I apply to Coppin State?" },
+    ],
+  },
+  {
+    label: "Programs & Academics",
+    prompts: [
+      { icon: "🏫", text: "Tell me about Coppin State programs" },
+      { icon: "💻", text: "Are there online courses available?" },
+    ],
+  },
+  {
+    label: "Financial Aid",
+    prompts: [
+      { icon: "💵", text: "How do I apply for financial aid?" },
+      { icon: "🏆", text: "What scholarships are available?" },
+    ],
+  },
 ];
 
-/**
- * PromptSuggestionsRow Component
- * Displays clickable suggestion buttons
- */
 const PromptSuggestionsRow = ({ onPromptClick }: PromptSuggestionsRowProps) => {
   return (
-    <div className="prompt-suggestions-row">
-      {PROMPTS.map((prompt) => (
-        <PromptSuggestionButton
-          key={prompt} // ✅ better than index (stable + unique)
-          text={prompt}
-          onClick={() => onPromptClick(prompt)}
-        />
+    <div className="landing-categories">
+      {CATEGORIES.map((cat) => (
+        <div key={cat.label} className="category-group">
+          <span className="category-label">{cat.label}</span>
+          <div className="category-cards">
+            {cat.prompts.map(({ icon, text }) => (
+              <button
+                key={text}
+                className="suggestion-card"
+                onClick={() => onPromptClick(text)}
+              >
+                <span className="card-icon">{icon}</span>
+                {text}
+              </button>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   );

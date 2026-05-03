@@ -9,9 +9,13 @@ interface BubbleProps {
 }
 
 const Bubble = ({ message }: BubbleProps) => {
+  const isUser = message.role === "user";
   return (
-    <div className={`bubble ${message.role}`}>
-      {message.content}
+    <div className={`message-row ${message.role}`}>
+      <div className={`avatar ${isUser ? "user" : "ai"}`}>
+        {isUser ? "U" : "E"}
+      </div>
+      <div className="bubble">{message.content}</div>
     </div>
   );
 };
